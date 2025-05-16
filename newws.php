@@ -1,4 +1,3 @@
-
 <?php 
 $session_id="";
 include('dbcon.php');
@@ -125,19 +124,19 @@ body
 
 								<?php
 								
-								$result= mysql_query("select * from post order by post_id DESC" ) or die (mysql_error());
-								while ($row= mysql_fetch_array ($result) ){
-								$id=$row['post_id'];
+								$result = mysqli_query($con, "SELECT * FROM post ORDER BY post_id DESC") or die(mysqli_error($con));
+								while ($row = mysqli_fetch_array($result)) {
+								$id = $row['post_id'];
 								?>
 								
 
 								<tr>
 								
-								<td style="text-align:center; word-break:break-all; width:300px;"> <?php echo $row ['post_id']; ?></td>
-								<td style="text-align:center; word-break:break-all; width:300px;"> <?php echo $row ['date']; ?></td>
+								<td style="text-align:center; word-break:break-all; width:300px;"> <?php echo $row['post_id']; ?></td>
+								<td style="text-align:center; word-break:break-all; width:300px;"> <?php echo $row['date']; ?></td>
 
-								<td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['title']; ?></td>
-								<td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row ['news']; ?></td>                     								</div>
+								<td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row['title']; ?></td>
+								<td style="text-align:center; word-break:break-all; width:200px;"> <?php echo $row['news']; ?></td>                     								</div>
 								</div>
 					
 																	

@@ -5,7 +5,6 @@ if (isset($_POST['Login'])) {
     $privilege = $_POST["privilege"];
     $username = $_POST["username"];
     $password = $_POST["password"];
-    $crypt_pass = md5($password);
 
     // Connect to the database
     $db = mysqli_connect("localhost", "root", "", "db");
@@ -16,7 +15,7 @@ if (isset($_POST['Login'])) {
 
     // Use prepared statement to prevent SQL injection
     $stmt = mysqli_prepare($db, "SELECT * FROM res_account WHERE username = ? AND password = ? AND privilege = ?");
-    mysqli_stmt_bind_param($stmt, "sss", $username, $crypt_pass, $privilege);
+    mysqli_stmt_bind_param($stmt, "sss", $username, $password, $privilege);
     mysqli_stmt_execute($stmt);
     $results = mysqli_stmt_get_result($stmt);
 
