@@ -169,7 +169,7 @@ Feedback</a></li>
 </form>
 </div></td>
               
-              <td class="right_container" valign="top" width="150px"><table class="right"  style="margin-top:0px;color;background-color:" width="100" cellpadding="0" cellspacing="0" >
+              <td class="right_container" valign="top" width="150px"><table class="right" style="margin-top:0px; color:inherit; background-color:transparent;" width="100" cellpadding="0" cellspacing="0">
                   <tr bgcolor=#AA9FAA>
                     <th class="right" ><font size="6">Calander</font></th>
                   </tr>
