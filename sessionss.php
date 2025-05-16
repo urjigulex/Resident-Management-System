@@ -7,7 +7,7 @@ include('dbcon.php');
 
 // Check if session variable exists
 if (!isset($_SESSION['username']) || trim($_SESSION['username']) === '') {
-    header("location: index11.php");
+    header("location: clalogin.php");
     exit();
 }
 
@@ -15,21 +15,22 @@ if (!isset($_SESSION['username']) || trim($_SESSION['username']) === '') {
 $username = mysqli_real_escape_string($con, $_SESSION['username']);
 
 // Run the query safely
-$qry = mysqli_query($con, "SELECT * FROM users WHERE username = '$username'") or die(mysqli_error($con));
+$qry = mysqli_query($con, "SELECT * FROM clark_account WHERE username = '$username'") or die(mysqli_error($con));
 
 // Check if a matching user was found
 if ($row = mysqli_fetch_array($qry)) {
-    if ($row['access'] != 0) {
-        header('location: ../');
+    if ($row['state'] != "active") {
+        session_destroy();
+        header('location: clalogin.php');
         exit();
     }
 
     $users = $row['username'];
-    $access = $row['access'];
+    $access = $row['privilege'];
 } else {
     // User not found in DB, force logout
     session_destroy();
-    header("location: index11.php");
+    header("location: clalogin.php");
     exit();
 }
 ?>

@@ -1,11 +1,14 @@
-
 <?php 
-$session_id="";
 include('dbcon.php');
 include('sessionss.php'); 
-$result=mysqli_query($conn, "select * from clark_account where username='$session_id'")or die('Error In Session');
-$row=mysqli_fetch_array($result);
- ?>
+
+// Get username from session
+$session_id = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+
+// Query the database
+$result = mysqli_query($con, "SELECT * FROM clark_account WHERE username='$session_id'") or die('Error In Session');
+$row = mysqli_fetch_array($result);
+?>
 <?php include('db.php'); ?>
 <?php include('header2.php'); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">

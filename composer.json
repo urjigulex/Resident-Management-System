@@ -1,0 +1,22 @@
+{
+    "name": "resident-management-system",
+    "description": "Resident Management System",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "ext-pdo": "*",
+        "ext-mysqli": "*",
+        "ext-json": "*",
+        "ext-gd": "*",
+        "ext-mbstring": "*",
+        "ext-xml": "*",
+        "ext-curl": "*",
+        "ext-zip": "*",
+        "ext-fileinfo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+} 
