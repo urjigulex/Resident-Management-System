@@ -117,17 +117,22 @@ body
 						</table>
 						</form>
 					<?php
-                                  $conn=mysql_connect("localhost","root","");
-	                 mysql_select_db("onlinekebele",$conn);
+                                  $conn = mysqli_connect("localhost", "root", "", "db");
+                                  if (!$conn) {
+                                      die("Connection failed: " . mysqli_connect_error());
+                                  }
 					if(isset($_POST['search']))
  {
-					$idno=$_POST['name'];
-					$birth=$_POST['pplaceofbirth'];
-					$death=$_POST['placeofdeath'];
-					$sql= "SELECT * FROM death WHERE name='$idno' and pplaceofbirth= '$birth' and placeofdeath='$death'";
-					$result=mysql_query($sql);
-					$count=mysql_num_rows($result);
-					if($count<1)
+					$idno = $_POST['name'];
+					$birth = $_POST['pplaceofbirth'];
+					$death = $_POST['placeofdeath'];
+					$sql = "SELECT * FROM death WHERE name=? AND pplaceofbirth=? AND placeofdeath=?";
+                    $stmt = mysqli_prepare($conn, $sql);
+                    mysqli_stmt_bind_param($stmt, "sss", $idno, $birth, $death);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+					$count = mysqli_num_rows($result);
+					if($count < 1)
 					{
 					die('<font color="red">BY this information thier is no death certificate,please enter correctly!?</font>');		
 					}
@@ -152,7 +157,7 @@ echo "<table border='1' style='width:350px;border-radius:10px;' align='center'>
 <th>Remark</th>
 <th>Action.</th>
 </tr>";
-while($row = mysql_fetch_array($result))
+while($row = mysqli_fetch_array($result))
   {
   $ctrl = $row['reg_no'];
    print ("<tr>");
@@ -182,7 +187,7 @@ print( "</table>");
 echo"</center>";
 }
 }
-mysql_close($conn);
+mysqli_close($conn);
 ?>
 					
 								

@@ -120,15 +120,20 @@ body
 						</table>
 						</form>
 					<?php
-                                  $conn=mysql_connect("localhost","root","");
-	                 mysql_select_db("onlinekebele",$conn);
+                                  $conn = mysqli_connect("localhost", "root", "", "db");
+                                  if (!$conn) {
+                                      die("Connection failed: " . mysqli_connect_error());
+                                  }
 					if(isset($_POST['search']))
  {
-					$idno=$_POST['searchs'];
-					$sql= "SELECT * FROM withdrawal WHERE IdNumber='{$idno}'";
-					$result=mysql_query($sql);
-					$count=mysql_num_rows($result);
-					if($count<1)
+					$idno = $_POST['searchs'];
+					$sql = "SELECT * FROM withdrawal WHERE IdNumber=?";
+                    $stmt = mysqli_prepare($conn, $sql);
+                    mysqli_stmt_bind_param($stmt, "s", $idno);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+					$count = mysqli_num_rows($result);
+					if($count < 1)
 					{
 					die('<font color="red">This Id Number is not found</font>');		
 					}
@@ -139,12 +144,9 @@ echo "<table border='1' style='width:650px;border-radius:10px;' align='center'>
 <tr bgcolor='#00CCFF'>
 <th width='150px'>ID NO.</th>
 <th>FULLNames</th>
-
-
 <th>View</th>
-
 </tr>";
-while($row = mysql_fetch_array($result))
+while($row = mysqli_fetch_array($result))
   {
   $ctrl = $row['IdNumber'];
   print ("<tr>");
@@ -159,7 +161,7 @@ print( "</table>");
 echo"</center>";
 }
 }
-mysql_close($conn);
+mysqli_close($conn);
 ?>
 					
 								

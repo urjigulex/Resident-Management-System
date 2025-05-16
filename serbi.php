@@ -117,17 +117,22 @@ body
 						</table>
 						</form>
 					<?php
-                                  $conn=mysql_connect("localhost","root","");
-	                 mysql_select_db("onlinekebele",$conn);
+                                  $conn = mysqli_connect("localhost", "root", "", "db");
+                                  if (!$conn) {
+                                      die("Connection failed: " . mysqli_connect_error());
+                                  }
 					if(isset($_POST['search']))
  {
-					$idno=$_POST['childfullname'];
-					$mother=$_POST['motherfullname'];
-					$father=$_POST['fatherfullname'];
-					$sql= "SELECT * FROM birth WHERE childfullname='$idno' and motherfullname ='$mother' and fatherfullname='$father'";
-					$result=mysql_query($sql);
-					$count=mysql_num_rows($result);
-					if($count<1)
+					$idno = $_POST['childfullname'];
+					$mother = $_POST['motherfullname'];
+					$father = $_POST['fatherfullname'];
+					$sql = "SELECT * FROM birth WHERE childfullname=? AND motherfullname=? AND fatherfullname=?";
+                    $stmt = mysqli_prepare($conn, $sql);
+                    mysqli_stmt_bind_param($stmt, "sss", $idno, $mother, $father);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+					$count = mysqli_num_rows($result);
+					if($count < 1)
 					{
 					die('<font color="red">By this Information you have not birth certificate,please try again correctly!?</font>');		
 					}
@@ -160,7 +165,7 @@ echo "<table border='1' style='width:350px;border-radius:10px;' align='center'>
 <th>Approved by.</th>
 <th>View</th>
 </tr>";
-while($row = mysql_fetch_array($result))
+while($row = mysqli_fetch_array($result))
   {
   $ctrl = $row['reg_no'];
    print ("<tr>");
@@ -198,7 +203,7 @@ print( "</table>");
 echo"</center>";
 }
 }
-mysql_close($conn);
+mysqli_close($conn);
 ?>
 					
 								

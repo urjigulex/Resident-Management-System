@@ -117,17 +117,22 @@ body
 						</table>
 						</form>
 					<?php
-                                  $conn=mysql_connect("localhost","root","");
-	                 mysql_select_db("onlinekebele",$conn);
+                                  $conn = mysqli_connect("localhost", "root", "", "db");
+                                  if (!$conn) {
+                                      die("Connection failed: " . mysqli_connect_error());
+                                  }
 					if(isset($_POST['search']))
  {
-					$idno=$_POST['fname'];
-					$house=$_POST['houseno'];
-					$phone=$_POST['phone'];
-					$sql= "SELECT * FROM id_card WHERE fname='$idno' and houseno='$house' and phone='$phone'";
-					$result=mysql_query($sql);
-					$count=mysql_num_rows($result);
-					if($count<1)
+					$idno = $_POST['fname'];
+					$house = $_POST['houseno'];
+					$phone = $_POST['phone'];
+					$sql = "SELECT * FROM id_card WHERE fname=? AND houseno=? AND phone=?";
+                    $stmt = mysqli_prepare($conn, $sql);
+                    mysqli_stmt_bind_param($stmt, "sss", $idno, $house, $phone);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+					$count = mysqli_num_rows($result);
+					if($count < 1)
 					{
 					die('<font color="red">By this Information you have not id card, please enter correctil!?</font>');		
 					}
@@ -155,7 +160,7 @@ echo "<table border='1' style='width:350px;border-radius:10px;' align='center'>
 <th>Renewal date.</th>
 <th>View</th>
 </tr>";
-while($row = mysql_fetch_array($result))
+while($row = mysqli_fetch_array($result))
   {
   $ctrl = $row['id_no'];
   print ("<tr>");
@@ -188,7 +193,7 @@ print( "</table>");
 echo"</center>";
 }
 }
-mysql_close($conn);
+mysqli_close($conn);
 ?>
 					
 								

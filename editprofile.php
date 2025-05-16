@@ -113,16 +113,21 @@ body
 						</table>
 						</form>
 					<?php
-                                  $conn=mysql_connect("localhost","root","");
-	                 mysql_select_db("onlinekebele",$conn);
+                                  $conn = mysqli_connect("localhost", "root", "", "db");
+                                  if (!$conn) {
+                                      die("Connection failed: " . mysqli_connect_error());
+                                  }
 					if(isset($_POST['search']))
  {
-					$idno=$_POST['fname'];
-					$phone=$_POST['phone'];
-					$sql= "SELECT * FROM resident WHERE fname='$idno' and phone='$phone'";
-					$result=mysql_query($sql);
-					$count=mysql_num_rows($result);
-					if($count<1)
+					$idno = $_POST['fname'];
+					$phone = $_POST['phone'];
+					$sql = "SELECT * FROM resident WHERE fname=? AND phone=?";
+                    $stmt = mysqli_prepare($conn, $sql);
+                    mysqli_stmt_bind_param($stmt, "ss", $idno, $phone);
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
+					$count = mysqli_num_rows($result);
+					if($count < 1)
 					{
 					die('<font color="red">By This Account there is no any information,Please try again Correctly ?!</font>');		
 					}
@@ -148,7 +153,7 @@ echo "<table border='1' style='width:350px;border-radius:10px;' align='center'>
 <th>reason.</th>
 <th>Change profile</th>
 </tr>";
-while($row = mysql_fetch_array($result))
+while($row = mysqli_fetch_array($result))
   {
   $ctrl = $row['reg_no'];
   print ("<tr>");
@@ -177,7 +182,7 @@ print( "</table>");
 echo"</center>";
 }
 }
-mysql_close($conn);
+mysqli_close($conn);
 ?>
 					
 								
