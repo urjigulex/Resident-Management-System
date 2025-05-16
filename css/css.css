@@ -1,0 +1,143 @@
+* { margin:0; padding:0;}
+
+/* HTML BODY TAG PROPERTIES */
+body{ 
+	font-family:Arial; 
+	font-size:12px;
+	background-image:url(../images/background.jpg);
+	background-color:bray;
+}
+
+/* CONTAINER OF HEADER, NAV, BODY CONTAINER AND FOOTERS */
+.container{ 
+	font-family:Arial, Helvetica, sans-serif; 
+	height:100%; 
+	width:70%;  /* over-all width of the web page */
+	margin:auto; /* to make the container CENTER aligned */
+	border: 0px solid navy;		   
+    padding: 10px;
+	
+	
+}
+
+.header{ 
+	
+	height:225px; 
+	background-image:url(../Photos/header_logoo.bmp);
+    margin: auto;
+    width: 70%;
+    border: 1px solid navy;
+    padding: 0px;
+	
+	
+}
+	
+/*NAVIGATOR*/
+.navigator{
+	width:100%; 
+	height:68px; 
+	background-color:#000000;
+	color:#FFFFFF;
+	padding-top:2px;
+	padding-left:2px;
+	padding-right:2px;
+	padding-bottom:2px;
+}
+
+/*END OF NAVIGATOR*/
+
+
+.bodycontainer{ 
+	width:100%; 
+	height:800px;
+	background-color:#FFFFFF;
+	
+	border: 1px solid navy;	
+	
+	padding:0px;
+	
+}
+
+
+
+/* CONTENTS INSIDE THE BODY */
+
+.footer{ 
+	width:100%; 
+	height:20px; 
+	background-color:#110011;
+	color:#FFFF66;
+	font-size:16px; 
+	padding-top:10px;
+}
+
+ input{
+ border:1px solid olive;
+ border-radius:1px;
+ }
+ h1{
+  color:darkgreen;
+  font-size:22px;
+  text-align:center;
+ }
+
+.center {
+    margin: auto;
+    width: 60%;
+    border: 1px solid black;
+    padding: 10px;
+
+
+}
+
+.right {
+   float: right;
+   border: 1px solid navy;
+   background-color: #ffffff;
+   width:20%px;
+   height:98%;
+	font:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	padding-top:10px;
+	padding-bottom:5px;
+	padding-right:10px;
+	padding-left:10px;
+
+}
+.footer
+{
+    margin: auto;
+    width: 100%;
+    border: 1px solid black;
+    padding: 0px;
+	float: bottom;
+}
+.search {
+   float: right;
+    width:200px;
+   height:100%;
+	font:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	padding-top:px;
+	padding-right:1px;
+	padding-left:1px;
+
+}
+.login{
+	float: right;
+   border: 1px solid navy;
+   background-color: #b0e0e6;
+   width:100%;
+   height:30%;
+	font:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	padding:0px;
+	font-weight:bold;
+	
+	
+	
+}
+

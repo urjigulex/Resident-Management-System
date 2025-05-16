@@ -1,0 +1,9 @@
+<?php 
+
+include('db.php');
+
+$get_id=$_GET['IdNumber'];
+
+mysql_query("delete from withdrawal where IdNumber= '$get_id' ")or die(mysql_error());
+header('location:viewclearance.php');
+?>

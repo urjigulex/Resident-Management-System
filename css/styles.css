@@ -1,0 +1,47 @@
+/* CSS Document */
+*
+{
+margin:0px;
+padding:0px;
+}
+#css ul
+{
+list-style:none;
+}
+#css ul li
+{
+background-color:#AA9FAA;
+margin:2px;
+width:200px;
+height:35px;
+text-align:center;
+line-height:35px;
+float:center;
+position:relative;
+border-radius:8px;
+}
+#css ul li a
+{
+text-decoration:none;
+color:black;
+display:block;
+}
+#css ul li a:hover
+{
+background-color:#0080FF;
+border-radius:8px;
+}
+#css ul ul
+{
+position:absolute;
+display:none;
+}
+#css ul li:hover >ul
+{
+display:block;
+}
+#css ul ul ul
+{
+margin-left:120px;
+top:0px;
+}
