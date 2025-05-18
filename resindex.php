@@ -1,11 +1,14 @@
-
 <?php 
-$session_id="";
 include('dbcon.php');
 include('session.php'); 
-$result=mysqli_query($con, "select * from clark_account where user_id='$session_id'")or die('Error In Session');
-$row=mysqli_fetch_array($result);
- ?>
+
+// Get username from session
+$session_id = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+
+// Query the database
+$result = mysqli_query($con, "SELECT * FROM clark_account WHERE username='$session_id'") or die('Error In Session');
+$row = mysqli_fetch_array($result);
+?>
 <?php include('db.php'); ?>
 <?php include('header1.php'); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -125,8 +128,8 @@ Home</a></li>
                             <tbody>
 								<?php
 								
-								$result= mysql_query("select * from resident order by reg_no DESC" ) or die (mysql_error());
-								while ($row= mysql_fetch_array ($result) ){
+								$result= mysqli_query($con, "select * from resident order by reg_no DESC" ) or die (mysqli_error($con));
+								while ($row= mysqli_fetch_array($result) ){
 								$id=$row['reg_no'];
 								?>
 								<tr>

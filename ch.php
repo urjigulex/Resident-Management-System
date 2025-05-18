@@ -174,8 +174,8 @@ Home</a></li>
                     <?php include('dbcon.php'); ?>
 <?php include('dbcon.php'); ?>
 					<?php
-						$conn=mysql_connect("localhost","root","");
-	  mysql_select_db("onlinekebele",$conn);
+						$conn=mysqli_connect("localhost","root","");
+	  mysqli_select_db($conn,"onlinekebele");
                     if (isset($_POST['change_password'])) {
                         require("dbcon.php");
                         $username = $_POST['username'];
@@ -211,7 +211,7 @@ Home</a></li>
                             }
 							
                             $sqll = "update clark_account set password='$new_password' where username = '$username' ";
-                            $res = mysql_query($sqll) or die("unable to change" . mysql_error());
+                            $res = mysqli_query($conn,$sqll) or die("unable to change" . mysqli_error($conn));
                             //echo '<script type="text/javascript">alert("You are successfully rest your password please login here");window.location=\'Anti_Corruption.php\';</script>';
                             echo '<font color="red" size="3">' . "Successfully Changed!;" . '</font>';
                             echo '</strong></div>';

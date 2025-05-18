@@ -1,11 +1,14 @@
-
 <?php 
-$session_id="";
 include('dbcon.php');
 include('session.php'); 
-$result=mysqli_query($con, "select * from clark_account where user_id='$session_id'")or die('Error In Session');
-$row=mysqli_fetch_array($result);
- ?>
+
+// Get username from session
+$session_id = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+
+// Query the database
+$result = mysqli_query($con, "SELECT * FROM clark_account WHERE username='$session_id'") or die('Error In Session');
+$row = mysqli_fetch_array($result);
+?>
 <?php include('db.php'); ?>
 <?php include('header2.php'); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -109,7 +112,7 @@ Home</a></li>
                             <thead>
                                 <tr>
 						            <th style="text-align:center;">No</th>						            <th style="text-align:center;">id_no</th>
-									<th style="text-									<th style="text-align:center;">rtype</td>
+									<th style="text-align:center;">rtype</td>
 									 <th style="text-align:center;">message</th>
 									<th style="text-align:center;">message_date</th>									<th style="text-align:center;">Action</th>
 									

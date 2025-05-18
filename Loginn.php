@@ -39,6 +39,7 @@ if (isset($_POST['Login'])) {
     } else {
         while ($row = mysqli_fetch_assoc($results)) {
             $_SESSION['username'] = $row['username'];
+            $_SESSION['user_type'] = 'admin';  // Set user type to admin
             $state = $row['state'];
 
             if ($state === "active") {
